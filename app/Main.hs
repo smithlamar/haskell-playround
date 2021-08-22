@@ -70,6 +70,7 @@ categorizeLetter char   | char >= 'a' && char <= 'z'    = 0
                         | otherwise                     = 2
 categorizeLetterOutput = categorizeLetter 'G'
 
+
 -- Questions from Chapter 4 - making lists
 
 -- 1) write a function evenElements which returns the even elements from a list e.g. for list [2, 4, 2, 4, 2] return [4, 4]
@@ -80,14 +81,32 @@ evenElements (_:x:xs) = x : evenElements xs
 evenElementsOutpout = evenElements [2, 4, 2, 4, 2]
 
 -- 2) Write a function countTrue which counts the number of True elements in a list. For example, countTrue [True, False, True] should return 2.
+
 boolToBinary x = if x == True then 1 else 0
+
 countTrue :: Num a => [Bool] -> a
 countTrue [] = 0
 countTrue (x:xs) =  (boolToBinary x) + countTrue xs 
 countTrueOutput = countTrue [True, False, True]
 
+
+-- 3) Write a function which, given a list, builds a palindrome from it. A palindrome is a list which equals its own reverse. Write another function which determines if a list is a palindrome.
+
+toPalindrome :: [a] -> [a]
+toPalindrome [] = []
+toPalindrome xs = xs ++ (reverse xs)
+toPalindromeOutput = toPalindrome [1..4]
+
+isPalindrome :: Eq a => [a] -> Bool
+isPalindrome xs = xs == (reverse xs)
+isPalindromeOutput = isPalindrome toPalindromeOutput 
+
+
+-- Exercise Output
 main :: IO ()
 main = do
+    -- chapters 1 - 3 output
+
     -- print myIdentityOutput
     -- print timesTenOutput
     -- print areBothFalseOutput
@@ -100,5 +119,9 @@ main = do
     -- print isConsonant2Output
     -- print sumMatchOutput
     -- print categorizeLetterOutput
+
+    -- Chapter 4 output
     print evenElementsOutpout
     print countTrueOutput
+    print toPalindromeOutput
+    print isPalindromeOutput

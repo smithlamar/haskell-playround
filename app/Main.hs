@@ -101,6 +101,26 @@ isPalindrome :: Eq a => [a] -> Bool
 isPalindrome xs = xs == (reverse xs)
 isPalindromeOutput = isPalindrome toPalindromeOutput 
 
+-- 4) Write a function dropLast which returns all but the last element of a list. If the list is empty, it should return the empty list. So, for example, dropLast [1, 2, 4, 8] should return [1, 2, 4].
+dropLast :: [a] -> [a]
+dropLast [] = []
+dropLast [x] = [x]
+dropLast xs = take (length xs - 1) xs
+dropLastOutput = dropLast [1 .. 4]
+
+
+-- 5) Write a function elem' of type Eq a ⇒ a → [a] → Bool which returns True if an element exists in a list, or False if not. For example, elem' 2 [1, 2, 3] should evaluate to True, but elem' 3 [1, 2] should evaluate to False.
+elem' :: Eq a => a -> [a] -> Bool
+elem' targetElement elements = any (targetElement ==) elements
+elemOutput = elem' 1 [2, 3, 1]
+
+
+-- 6) Use your elem' function to write a function makeSet which, given a list, returns a list which contains all the elements of the original list, but has no duplicate elements. For example, makeSet [1, 2, 3, 3, 1] might return [2, 3, 1].
+makeSet :: Eq a => [a] -> [a]
+makeSet [] = []
+makeSet (x:xs)  | elem x xs     = makeSet xs
+                | otherwise     = x : makeSet xs 
+makeSetOutput = makeSet [1, 1, 2, 3, 1, 2, 4]
 
 -- Exercise Output
 main :: IO ()
@@ -125,3 +145,6 @@ main = do
     print countTrueOutput
     print toPalindromeOutput
     print isPalindromeOutput
+    print dropLastOutput
+    print elemOutput
+    print makeSetOutput
